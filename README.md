@@ -1,23 +1,16 @@
-# ProjectAnnotator
+# Process.Annotator
+This is the backend/server component of process.annotator. If you are looking for the client component see [empty](empty)
 
-## Overview
 ### Backend/Server
 The Backend consinsts of a running CouchDB instance and a *NodeJS* script that listens to CouchDB events and does some maintanance work and helps creating project databases on the clients behalve (because only admin users are allowed to do so).
 
-### Client
+If you want to use the *neonionREST*-based process.annotator (experimental) you won't need this repo, but setup the REST-API according to [empty](empty).
 
-- The Client is an [Electron](http://electron.atom.io/) application (Has access to NodeJS under the hood, and also serves a minimal chromium for rendering and also JS executation). It is basically a Website that runs locally on the users computer and has access to NodeJS, which a regular website does not. Right the main brance depends on NodeJS for bluetooth support. However the `A-Frame` branch runs as a regular website and does not require Electron.
-
-- The UI is done with HTML/CSS rendered in electrons chromium instance
-
-- We are using [Polymer](http://polymer-project.org/) for templating UI elements like our *annotation-box* or *dashboard*. Polymer uses the W3C standard [https://www.w3.org/TR/components-intro/](Web Components).
-
-- To communicate with the CouchDB backend, [PouchDB](http://pouchdb.com/) is used. his makes it easy to use the application offline, because pouchdb creates a local DB (basically an [IndexDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) that uses the backend CouchDB when possible but falls back to the local storage when the user or server is offline. Both local pouchdb, and CouchDB get synced automatically by pouchdb!
 
 
 ## Getting Started
 ### Prerequisites
-To use *ProcessAnnotator* with your own infrastructure you first need to install following dependencies **on your server** (For testing this can be identical with your localhost/client of course):
+To use *ProcessAnnotator* with your own infrastructure you first need to install following dependencies **on your server** (For testing this can be identical with your localhost/client):
 - couchdb
 - nodejs (>5 tested, might or might not work with lower versions)
 - npm (should get installed with nodejs)
@@ -29,6 +22,7 @@ sudo dnf install couchdb
 
 # optionally make npm work without sudo, read and follow: https://docs.npmjs.com/getting-started/fixing-npm-permissions#option-2-change-npms-default-directory-to-another-directory
 ```
+
 Please Note: In some distros, the nodejs version is quite old. I recommend using [the node version manager (nvm)](https://github.com/creationix/nvm) if you have version 4.x or older.
 
 
@@ -68,24 +62,4 @@ npm install
 sudo cp ../systemd/system/processannotator.service /etc/systemd/system/processannotator.service
 ```
 
-## Running the electron client
-
-clone the repo and run the client:
-
-```.sh
-git clone git@github.com:nylki/ProjectAnnotator.git
-cd ProjectAnnotator/client
-# Install dependencies
-npm install
-# Start app
-npm start
-```
-
-If you want to distribute the app, run:
-```
-npm run package
-// this creates distributable binaries
-```
-
-For more detailed info, see:
-https://github.com/nylki/ProcessAnnotator/tree/master/client
+Now you are all set and can try to run the client component of process.annotator to see if you get a connection running!
