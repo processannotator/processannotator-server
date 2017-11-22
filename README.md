@@ -44,7 +44,7 @@ users_db_public = true
 ```
 
 
-If you installed the dependencies you should be able to (on distros using systemd, such as Fedora, Debian, ..):
+If you installed the dependencies you should be able to enable and start couchdb (on distros using systemd, such as Fedora, Debian, ..):
 
 ```.sh
 sudo systemctl enable couchdb
@@ -53,17 +53,24 @@ sudo systemctl start couchdb
 npm install -g add-cors-to-couchdb
 add-cors-to-couchdb
 # route port 80 to 5984 (optional)
-# This works on Fedora, use iptables on debian for example
+# This works on Fedora, if you dont use Fedora (eg. Debianb) you can use iptables
 sudo firewall-cmd --zone=FedoraServer --add-masquerade --permanent
 sudo firewall-cmd --zone=FedoraServer --add-forward-port=port=80:proto=tcp:toport=5984 --permanent
 ```
 
-Now, Clone the repo on your server:
+Confirm that couchdb is running:
 ```.sh
-git clone git@github.com:nylki/ProjectAnnotator.git
-cd ProjectAnnotator/server
+sudo systemctl status couchdb
+```
+
+Now you can clone this repo to a location of your liking:
+```.sh
+git clone https://github.com/processannotator/processannotator-server.git
+cd processannotator-server
+
 # Install dependencies
 npm install
+
 # you can start the server with npm start
 # but the optimal was is to install the systemd unit so it runs each reboot and restarts when crashed
 sudo cp ../systemd/system/processannotator.service /etc/systemd/system/processannotator.service
