@@ -36,6 +36,13 @@ Open it in your editor of choice (you need to have write access, so don't forget
 
 `vim /usr/local/etc/couchdb/local.ini`
 
+Then edit your `local.ini` to match the following:
+```
+public_fields = surname, prename, color
+allow_persistent_cookies = true
+users_db_public = true
+```
+
 
 If you installed the dependencies you should be able to (on distros using systemd, such as Fedora, Debian, ..):
 
